@@ -6,6 +6,7 @@ Created on Wed Dec 22 10:07:41 2021
 """
 
 from skipjack import SkipJack
+import hashlib
 
 
 def encryptFile():
@@ -35,5 +36,17 @@ def decryptFile():
                 f_out.write(block)
                 block_encypt = f_in.read(BLOCK_SIZE)
 
+
+
+# check password to start the system
+hash_pass = "79f06f8fde333461739f220090a23cb2a79f6d714bee100d0e4b4af249294619" #=4444
+password_str = input("Please enter your password: ")
+
+password_hex = hashlib.sha256(password_str.encode('utf-8')).hexdigest()
+if password_hex != hash_pass:
+    print("Wrong answer !")
+    exit(1)
+
+    
 encryptFile()
 decryptFile()
